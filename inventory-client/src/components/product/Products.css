@@ -1,0 +1,14 @@
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.products-grid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
