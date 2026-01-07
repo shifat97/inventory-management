@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 function App() {
-  const portNumber = import.meta.env.VITE_APP_PORT_NUMBER;
+  const portNumber = import.meta.env.VITE_PORT_NUMBER;
 
   console.log(portNumber);
 
