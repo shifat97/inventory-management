@@ -1,6 +1,9 @@
 import express, { type Request, type Response } from "express";
 import { envConfig } from "@/config";
 import cors from "cors";
+import {connectDB} from "./config";
+
+connectDB();
 
 const app = express();
 app.use(
