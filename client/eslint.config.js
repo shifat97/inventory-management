@@ -8,7 +8,15 @@ import { defineConfig, globalIgnores } from "eslint/config";
 export default defineConfig([
   globalIgnores(["dist"]),
   {
-    files: ["**/*.{ts,tsx}"],
+    ignores: [
+      'components/ui/**', // ✅ Ignore all shadcn/ui files
+    ],
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
