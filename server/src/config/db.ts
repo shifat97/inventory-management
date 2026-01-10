@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
-import "dotenv/config";
+import { envConfig } from "./env-config";
 
-const URI: string | undefined = process.env.MONGO_URI;
-
-const connectDB = async (): Promise<void> => {
+export const connectDB = async (): Promise<void> => {
   try {
-    if (!URI) {
+    if (!envConfig.MONGO_URI) {
       throw new Error("MONGO_URI is not defined in environment variables");
     }
 
-    await mongoose.connect(URI);
+    await mongoose.connect(envConfig.MONGO_URI, {
+      dbName: envConfig.DB_NAME || "inv-db",
+    });
     console.log("Connected to MongoDB");
   } catch (error) {
     if (error instanceof Error) {
@@ -19,5 +19,3 @@ const connectDB = async (): Promise<void> => {
     }
   }
 };
-
-export { connectDB };

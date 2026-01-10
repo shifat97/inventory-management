@@ -1,2 +1,2 @@
 export * from "./env-config";
-  export  {connectDB}  from './database-config'
+export * from "./db";
