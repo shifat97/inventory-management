@@ -1,11 +1,10 @@
+import express from "express";
 import cors from "cors";
-import express, { type Request, type Response } from "express";
+import pinoHttp from "pino-http";
 
-import { envConfig, connectDB } from "@/config";
+import { envConfig, connectDB, logger } from "@/config";
 import configureRouters from "@/routes";
 import { errorHandler } from "@/middlewares";
-
-import pinoHttp from "pino-http";
 
 const app = express();
 app.use(pinoHttp({ logger }));
