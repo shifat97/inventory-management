@@ -13,6 +13,9 @@ export const getUsers = async (_req: Request, res: Response) => {
 
 export const updateUserById = async (req: Request, res: Response) => {
   const updatedUser = await userService.updateUserById(req.params.id, req.body);
+
+  if (!updatedUser) res.status(404).json({ message: 'User not found' });
+
   res
     .status(200)
     .json({ users: updatedUser, message: 'User updated successful' });

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { CreateUserSchema } from '@/schemas';
 import { UserModel } from './model';
 import { envConfig } from '@/config';
-import { User } from '@/types';
+import { UpdateUser, User } from '@/types';
 
 export const getHashedPassword = async (password: string) =>
   bcrypt.hash(password, envConfig.BCRYPT_SALT_ROUNDS);
@@ -31,9 +31,19 @@ export const getUsers = async () => {
 
 export const updateUserById = async (
   _id: string,
-  newDataPayload: z.infer<typeof CreateUserSchema>,
+  updatedUserPayload: UpdateUser,
 ) => {
-  return UserModel.findByIdAndUpdate(_id, newDataPayload, {
+  const user = await UserModel.findById(_id);
+  if (!user) return false;
+
+  const payload = { ...updatedUserPayload };
+
+  if (payload.password) {
+    payload.passwordHash = await getHashedPassword(payload.password);
+    delete payload.password;
+  }
+
+  return UserModel.findByIdAndUpdate(_id, payload, {
     new: true,
   });
 };

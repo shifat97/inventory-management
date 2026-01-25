@@ -22,3 +22,21 @@ export const CreateUserSchema = UserSchema.pick({
 }).extend({
   password: z.string().min(6, 'Password must be at least 6 characters long'),
 });
+
+export const UpdateUserSchema = z
+  .object({
+    ...CreatedMixin.shape,
+    ...UpdatedMixin.shape,
+    ...SoftDeleteMixin.shape,
+    name: z.string().optional(),
+    email: z.string().optional(),
+    passwordHash: z.string().optional(),
+    isDraft: z.boolean().optional(),
+    role: z.string().optional(),
+  })
+  .extend({
+    password: z
+      .string()
+      .min(6, 'Password must be at least 6 characters long')
+      .optional(),
+  });
