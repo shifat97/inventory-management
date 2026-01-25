@@ -9,4 +9,11 @@ export const createUser = async (req: Request, res: Response) => {
 export const getUsers = async (_req: Request, res: Response) => {
   const users = await userService.getUsers();
   res.status(200).json(users);
-}
+};
+
+export const updateUserById = async (req: Request, res: Response) => {
+  const updatedUser = await userService.updateUserById(req.params.id, req.body);
+  res
+    .status(200)
+    .json({ users: updatedUser, message: 'User updated successful' });
+};

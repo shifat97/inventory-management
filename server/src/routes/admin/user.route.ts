@@ -16,9 +16,7 @@ adminUserRouter.get('/', userController.getUsers);
 adminUserRouter.get('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.put('/:id', (_req: Request, _res: Response) => {
-  throw new NotImplementedError();
-});
+adminUserRouter.put('/:id', userController.updateUserById);
 adminUserRouter.delete('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
