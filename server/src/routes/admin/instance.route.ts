@@ -13,5 +13,6 @@ router.post(
 );
 router.get('/', instanceController.getInstances);
 router.get('/:id', instanceController.getInstancesById);
+router.put('/:id', instanceController.updateInstanceById);
 
 export default router;

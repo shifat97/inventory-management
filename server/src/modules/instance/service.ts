@@ -1,4 +1,4 @@
-import { CreateInstance } from '@/types';
+import { CreateInstance, UpdateInstance } from '@/types';
 import { InstanceModel } from '@/modules/instance';
 
 export const createInstance = async (instancePayload: CreateInstance) => {
@@ -12,4 +12,13 @@ export const getInstances = async () => {
 
 export const getInstancesById = async (_id: string) => {
   return InstanceModel.findById(_id);
+};
+
+export const updateInstanceById = async (
+  _id: string,
+  updateInstancePayload: UpdateInstance,
+) => {
+  return InstanceModel.findByIdAndUpdate(_id, updateInstancePayload, {
+    new: true,
+  });
 };

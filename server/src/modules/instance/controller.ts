@@ -16,3 +16,14 @@ export const getInstancesById = async (req: Request, res: Response) => {
   const instance = await instanceService.getInstancesById(req.params.id);
   res.status(200).json(instance);
 };
+
+export const updateInstanceById = async (req: Request, res: Response) => {
+  const updatedInstance = await instanceService.updateInstanceById(
+    req.params.id,
+    req.body,
+  );
+  res.status(200).json({
+    instance: updatedInstance,
+    message: 'Instance updated successfully',
+  });
+};
