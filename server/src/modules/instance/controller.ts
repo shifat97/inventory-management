@@ -27,3 +27,8 @@ export const updateInstanceById = async (req: Request, res: Response) => {
     message: 'Instance updated successfully',
   });
 };
+
+export const deleteInstanceById = async (req: Request, res: Response) => {
+  await instanceService.deleteInstanceById(req.params.id);
+  res.status(200).json({ message: 'Instance deleted successful' });
+};

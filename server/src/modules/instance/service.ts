@@ -22,3 +22,10 @@ export const updateInstanceById = async (
     new: true,
   });
 };
+
+export const deleteInstanceById = async (_id: string) => {
+  return InstanceModel.findByIdAndUpdate(_id, {
+    deleted: true,
+    deletedAt: new Date().toISOString(),
+  });
+};
