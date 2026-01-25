@@ -12,5 +12,6 @@ router.post(
   instanceController.createInstance,
 );
 router.get('/', instanceController.getInstances);
+router.get('/:id', instanceController.getInstancesById);
 
 export default router;

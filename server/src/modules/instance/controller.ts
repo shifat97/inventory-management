@@ -11,3 +11,8 @@ export const getInstances = async (_req: Request, res: Response) => {
   const instances = await instanceService.getInstances();
   res.status(200).json(instances);
 };
+
+export const getInstancesById = async (req: Request, res: Response) => {
+  const instance = await instanceService.getInstancesById(req.params.id);
+  res.status(200).json(instance);
+};

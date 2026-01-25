@@ -9,3 +9,7 @@ export const createInstance = async (instancePayload: CreateInstance) => {
 export const getInstances = async () => {
   return InstanceModel.find();
 };
+
+export const getInstancesById = async (_id: string) => {
+  return InstanceModel.findById(_id);
+};
