@@ -11,5 +11,6 @@ router.post(
   validateRequestBody(CreateInstanceSchema),
   instanceController.createInstance,
 );
+router.get('/', instanceController.getInstances);
 
 export default router;
