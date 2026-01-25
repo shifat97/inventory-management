@@ -49,6 +49,10 @@ export const updateUserById = async (
 };
 
 export const deleteUserById = async (_id: string) => {
+  const user = await UserModel.findById(_id);
+
+  if (!user) return false;
+
   return UserModel.findByIdAndUpdate(
     _id,
     {
