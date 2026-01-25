@@ -1,3 +1,3 @@
-export * as instanceController from "./controller";
-export * as instanceService from "./service";
-export * from "./model";
+export * as instanceController from './controller';
+export * as instanceService from './service';
+export * from './model';
