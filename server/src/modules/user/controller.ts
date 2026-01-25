@@ -17,3 +17,8 @@ export const updateUserById = async (req: Request, res: Response) => {
     .status(200)
     .json({ users: updatedUser, message: 'User updated successful' });
 };
+
+export const deleteUserById = async (req: Request, res: Response) => {
+  await userService.deleteUserById(req.params.id);
+  res.status(200).json({ message: 'User delete successful' });
+};

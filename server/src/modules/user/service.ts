@@ -38,6 +38,19 @@ export const updateUserById = async (
   });
 };
 
+export const deleteUserById = async (_id: string) => {
+  return UserModel.findByIdAndUpdate(
+    _id,
+    {
+      deleted: true,
+      deletedAt: new Date().toISOString(),
+    },
+    {
+      new: true,
+    },
+  );
+};
+
 export const findUserByEmail = async (email: string) => {
   return UserModel.findOne({ email }).select(
     '_id name email passwordHash role deleted',
