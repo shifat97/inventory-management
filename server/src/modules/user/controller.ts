@@ -14,9 +14,9 @@ export const getUsers = async (_req: Request, res: Response) => {
 export const updateUserById = async (req: Request, res: Response) => {
   const updatedUser = await userService.updateUserById(req.params.id, req.body);
 
-  if (!updatedUser) res.status(404).json({ message: 'User not found' });
+  if (!updatedUser) return res.status(404).json({ message: 'User not found' });
 
-  res
+  return res
     .status(200)
     .json({ users: updatedUser, message: 'User updated successful' });
 };
@@ -24,6 +24,6 @@ export const updateUserById = async (req: Request, res: Response) => {
 export const deleteUserById = async (req: Request, res: Response) => {
   const deleteUser = await userService.deleteUserById(req.params.id);
 
-  if (!deleteUser) res.status(404).json({ message: 'User not found' });
-  else res.status(200).json({ message: 'User delete successful' });
+  if (!deleteUser) return res.status(404).json({ message: 'User not found' });
+  return res.status(200).json({ message: 'User delete successful' });
 };
