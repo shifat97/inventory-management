@@ -26,7 +26,7 @@ export const createUser = async (
 };
 
 export const getUsers = async () => {
-  return UserModel.find();
+  return await UserModel.find();
 };
 
 export const updateUserById = async (
@@ -43,7 +43,7 @@ export const updateUserById = async (
     delete payload.password;
   }
 
-  return UserModel.findByIdAndUpdate(_id, payload, {
+  return await UserModel.findByIdAndUpdate(_id, payload, {
     new: true,
   });
 };
@@ -58,6 +58,23 @@ export const deleteUserById = async (_id: string) => {
     {
       deleted: true,
       deletedAt: new Date().toISOString(),
+    },
+    {
+      new: true,
+    },
+  );
+};
+
+export const restoreUser = async (_id: string) => {
+  const user = await UserModel.findById(_id);
+
+  if (!user) return false;
+
+  return UserModel.findByIdAndUpdate(
+    _id,
+    {
+      deleted: false,
+      deletedAt: null,
     },
     {
       new: true,

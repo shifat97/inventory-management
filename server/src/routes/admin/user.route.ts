@@ -18,7 +18,5 @@ adminUserRouter.get('/:id', (_req: Request, _res: Response) => {
 });
 adminUserRouter.put('/:id', userController.updateUserById);
 adminUserRouter.delete('/:id', userController.deleteUserById);
-adminUserRouter.patch('/:id/restore', (_req: Request, _res: Response) => {
-  throw new NotImplementedError();
-});
+adminUserRouter.patch('/:id/restore', userController.restoreUser);
 export default adminUserRouter;
