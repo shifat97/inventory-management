@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { validateRequestBody } from '@/middlewares';
 import { instanceController } from '@/modules/instance';
-import { CreateInstanceSchema } from '@/schemas';
+import { CreateInstanceSchema, UpdateInstanceSchema } from '@/schemas';
 
 const router = Router();
 
@@ -13,7 +13,11 @@ router.post(
 );
 router.get('/', instanceController.getInstances);
 router.get('/:id', instanceController.getInstancesById);
-router.put('/:id', instanceController.updateInstanceById);
+router.put(
+  '/:id',
+  validateRequestBody(UpdateInstanceSchema),
+  instanceController.updateInstanceById,
+);
 router.delete('/:id', instanceController.deleteInstanceById);
 
 export default router;

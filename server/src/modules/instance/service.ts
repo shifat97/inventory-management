@@ -22,9 +22,17 @@ export const updateInstanceById = async (
   _id: string,
   updateInstancePayload: UpdateInstance,
 ) => {
-  return InstanceModel.findByIdAndUpdate(_id, updateInstancePayload, {
-    new: true,
-  });
+  const updatedUser = InstanceModel.findByIdAndUpdate(
+    _id,
+    updateInstancePayload,
+    {
+      new: true,
+    },
+  );
+
+  if (!updatedUser) return false;
+
+  return updatedUser;
 };
 
 export const deleteInstanceById = async (_id: string) => {

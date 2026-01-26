@@ -25,7 +25,11 @@ export const updateInstanceById = async (req: Request, res: Response) => {
     req.params.id,
     req.body,
   );
-  res.status(200).json({
+
+  if (!updatedInstance)
+    return res.status(404).json({ message: 'No user found' });
+
+  return res.status(200).json({
     instance: updatedInstance,
     message: 'Instance updated successfully',
   });
