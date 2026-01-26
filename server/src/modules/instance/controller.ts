@@ -42,3 +42,15 @@ export const deleteInstanceById = async (req: Request, res: Response) => {
 
   return res.status(200).json({ message: 'Instance deleted successful' });
 };
+
+export const restoreInstance = async (req: Request, res: Response) => {
+  const restoredUser = await instanceService.restoreUser(req.params.id);
+
+  if (!restoredUser)
+    return res.status(404).json({ message: 'No instance found' });
+
+  return res.status(201).json({
+    user: restoredUser,
+    message: 'Instance updated successfully',
+  });
+};

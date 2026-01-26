@@ -19,5 +19,6 @@ router.put(
   instanceController.updateInstanceById,
 );
 router.delete('/:id', instanceController.deleteInstanceById);
+router.patch('/:id/restore', instanceController.restoreInstance);
 
 export default router;

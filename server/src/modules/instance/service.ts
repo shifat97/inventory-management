@@ -45,3 +45,18 @@ export const deleteInstanceById = async (_id: string) => {
 
   return deletedUser;
 };
+
+export const restoreUser = async (_id: string) => {
+  const restoredUser = await InstanceModel.findById(_id);
+
+  if (!restoredUser) return false;
+
+  return await InstanceModel.findByIdAndUpdate(
+    _id,
+    {
+      deleted: false,
+      deletedAt: null,
+    },
+    { new: true },
+  );
+};
