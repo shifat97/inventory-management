@@ -11,7 +11,11 @@ export const getInstances = async () => {
 };
 
 export const getInstancesById = async (_id: string) => {
-  return InstanceModel.findById(_id);
+  const user = InstanceModel.findById(_id);
+
+  if (!user) return false;
+
+  return user;
 };
 
 export const updateInstanceById = async (

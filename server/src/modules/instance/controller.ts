@@ -14,7 +14,10 @@ export const getInstances = async (_req: Request, res: Response) => {
 
 export const getInstancesById = async (req: Request, res: Response) => {
   const instance = await instanceService.getInstancesById(req.params.id);
-  res.status(200).json(instance);
+
+  if (!instance) return res.status(404).json({ message: 'No user found' });
+
+  return res.status(200).json(instance);
 };
 
 export const updateInstanceById = async (req: Request, res: Response) => {
