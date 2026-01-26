@@ -7,11 +7,11 @@ export const createInstance = async (instancePayload: CreateInstance) => {
 };
 
 export const getInstances = async () => {
-  return InstanceModel.find();
+  return await InstanceModel.find();
 };
 
 export const getInstancesById = async (_id: string) => {
-  const user = InstanceModel.findById(_id);
+  const user = await InstanceModel.findById(_id);
 
   if (!user) return false;
 
@@ -22,7 +22,7 @@ export const updateInstanceById = async (
   _id: string,
   updateInstancePayload: UpdateInstance,
 ) => {
-  const updatedUser = InstanceModel.findByIdAndUpdate(
+  const updatedUser = await InstanceModel.findByIdAndUpdate(
     _id,
     updateInstancePayload,
     {
