@@ -15,7 +15,7 @@ export const getInstances = async (_req: Request, res: Response) => {
 export const getInstancesById = async (req: Request, res: Response) => {
   const instance = await instanceService.getInstancesById(req.params.id);
 
-  if (!instance) return res.status(404).json({ message: 'No user found' });
+  if (!instance) return res.status(404).json({ message: 'No instance found' });
 
   return res.status(200).json(instance);
 };
@@ -27,7 +27,7 @@ export const updateInstanceById = async (req: Request, res: Response) => {
   );
 
   if (!updatedInstance)
-    return res.status(404).json({ message: 'No user found' });
+    return res.status(404).json({ message: 'No instance found' });
 
   return res.status(200).json({
     instance: updatedInstance,
@@ -38,7 +38,8 @@ export const updateInstanceById = async (req: Request, res: Response) => {
 export const deleteInstanceById = async (req: Request, res: Response) => {
   const deletedUser = await instanceService.deleteInstanceById(req.params.id);
 
-  if (!deletedUser) return res.status(404).json({ message: 'No user found' });
+  if (!deletedUser)
+    return res.status(404).json({ message: 'No instance found' });
 
   return res.status(200).json({ message: 'Instance deleted successful' });
 };
