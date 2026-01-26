@@ -11,18 +11,18 @@ export const getInstances = async () => {
 };
 
 export const getInstancesById = async (_id: string) => {
-  const user = await InstanceModel.findById(_id);
+  const instance = await InstanceModel.findById(_id);
 
-  if (!user) return false;
+  if (!instance) return false;
 
-  return user;
+  return instance;
 };
 
 export const updateInstanceById = async (
   _id: string,
   updateInstancePayload: UpdateInstance,
 ) => {
-  const updatedUser = await InstanceModel.findByIdAndUpdate(
+  const updatedInstance = await InstanceModel.findByIdAndUpdate(
     _id,
     updateInstancePayload,
     {
@@ -30,26 +30,26 @@ export const updateInstanceById = async (
     },
   );
 
-  if (!updatedUser) return false;
+  if (!updatedInstance) return false;
 
-  return updatedUser;
+  return updatedInstance;
 };
 
 export const deleteInstanceById = async (_id: string) => {
-  const deletedUser = await InstanceModel.findByIdAndUpdate(_id, {
+  const deletedInstance = await InstanceModel.findByIdAndUpdate(_id, {
     deleted: true,
     deletedAt: new Date().toISOString(),
   });
 
-  if (!deletedUser || deletedUser.deleted) return false;
+  if (!deletedInstance || deletedInstance.deleted) return false;
 
-  return deletedUser;
+  return deletedInstance;
 };
 
-export const restoreUser = async (_id: string) => {
-  const restoredUser = await InstanceModel.findById(_id);
+export const restoreInstance = async (_id: string) => {
+  const restoredInstance = await InstanceModel.findById(_id);
 
-  if (!restoredUser) return false;
+  if (!restoredInstance) return false;
 
   return await InstanceModel.findByIdAndUpdate(
     _id,

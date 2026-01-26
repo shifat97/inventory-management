@@ -36,22 +36,24 @@ export const updateInstanceById = async (req: Request, res: Response) => {
 };
 
 export const deleteInstanceById = async (req: Request, res: Response) => {
-  const deletedUser = await instanceService.deleteInstanceById(req.params.id);
+  const deletedInstance = await instanceService.deleteInstanceById(
+    req.params.id,
+  );
 
-  if (!deletedUser)
+  if (!deletedInstance)
     return res.status(404).json({ message: 'No instance found' });
 
   return res.status(200).json({ message: 'Instance deleted successful' });
 };
 
 export const restoreInstance = async (req: Request, res: Response) => {
-  const restoredUser = await instanceService.restoreUser(req.params.id);
+  const restoredInstance = await instanceService.restoreInstance(req.params.id);
 
-  if (!restoredUser)
+  if (!restoredInstance)
     return res.status(404).json({ message: 'No instance found' });
 
   return res.status(201).json({
-    user: restoredUser,
+    instance: restoredInstance,
     message: 'Instance updated successfully',
   });
 };
