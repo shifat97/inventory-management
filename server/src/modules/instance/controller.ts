@@ -36,6 +36,9 @@ export const updateInstanceById = async (req: Request, res: Response) => {
 };
 
 export const deleteInstanceById = async (req: Request, res: Response) => {
-  await instanceService.deleteInstanceById(req.params.id);
-  res.status(200).json({ message: 'Instance deleted successful' });
+  const deletedUser = await instanceService.deleteInstanceById(req.params.id);
+
+  if (!deletedUser) return res.status(404).json({ message: 'No user found' });
+
+  return res.status(200).json({ message: 'Instance deleted successful' });
 };

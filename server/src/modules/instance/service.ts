@@ -36,8 +36,12 @@ export const updateInstanceById = async (
 };
 
 export const deleteInstanceById = async (_id: string) => {
-  return InstanceModel.findByIdAndUpdate(_id, {
+  const deletedUser = await InstanceModel.findByIdAndUpdate(_id, {
     deleted: true,
     deletedAt: new Date().toISOString(),
   });
+
+  if (!deletedUser || deletedUser.deleted) return false;
+
+  return deletedUser;
 };
