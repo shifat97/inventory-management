@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserSchema, updateUserSchema } from '@/schemas/user';
 import type { UserFormValues } from '@/pages/users';
+import http from '@/lib/http';
 
 interface UserFormProps {
   mode?: 'create' | 'update';
@@ -18,8 +19,18 @@ export const UserForm = ({ mode = 'create', defaultValues }: UserFormProps) => {
 
   const onSubmit = (data: UserFormValues) => {
     if (isCreate) {
-      console.log('Create User:', data);
-      // createUser(data);
+      const { name, email, password, role } = data;
+      http
+        .post('/api/admin/users', {
+          name: name,
+          email: email,
+          password: password,
+          role: role,
+        })
+        .then((_res) => alert('User creation successful'))
+        .catch((error) => {
+          console.error('User creation failed', error);
+        });
     } else {
       console.log('Update User:', data);
       // updateUser(data);
