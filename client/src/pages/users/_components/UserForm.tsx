@@ -2,14 +2,20 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserSchema, updateUserSchema } from '@/schemas/user';
 import type { UserFormValues } from '@/pages/users';
-import http from '@/lib/http';
+import { useEffect } from 'react';
+import { getUserFromLS } from '@/utils';
 
 interface UserFormProps {
   mode?: 'create' | 'update';
   defaultValues?: Partial<UserFormValues>;
+  onSubmit: (data: UserFormValues) => void;
 }
 
-export const UserForm = ({ mode = 'create', defaultValues }: UserFormProps) => {
+export const UserForm = ({
+  mode = 'create',
+  defaultValues,
+  onSubmit,
+}: UserFormProps) => {
   const isCreate = mode === 'create';
 
   const form = useForm<UserFormValues>({
@@ -17,30 +23,23 @@ export const UserForm = ({ mode = 'create', defaultValues }: UserFormProps) => {
     defaultValues,
   });
 
-  const onSubmit = (data: UserFormValues) => {
-    if (isCreate) {
-      const { name, email, password, role } = data;
-      http
-        .post('/api/admin/users', {
-          name: name,
-          email: email,
-          password: password,
-          role: role,
-        })
-        .then((_res) => alert('User creation successful'))
-        .catch((error) => {
-          console.error('User creation failed', error);
-        });
-    } else {
-      console.log('Update User:', data);
-      // updateUser(data);
-    }
-  };
+  useEffect(() => {
+    if (mode !== 'update') return;
+
+    const user = getUserFromLS();
+
+    form.reset({
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      // password intentionally omitted
+    });
+  }, [mode, form]);
 
   const inputStyles =
     'w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent';
   const buttonStyles =
-    'w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50';
+    'w-full p-2 bg-black text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50';
 
   return (
     <form
@@ -67,9 +66,9 @@ export const UserForm = ({ mode = 'create', defaultValues }: UserFormProps) => {
         />
 
         <select {...form.register('role')} className={inputStyles}>
-          <option value="">Select a Role</option>
+          <option value="">Select Role</option>
           <option value="admin">Admin</option>
-          <option value="shopkeeper">Shop Keeper</option>
+          <option value="shop-keeper">Shop Keeper</option>
         </select>
 
         <button type="submit" className={buttonStyles}>
