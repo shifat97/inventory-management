@@ -30,7 +30,7 @@ export const createUser = async (
 };
 
 export const getUsers = async () => {
-  return await UserModel.find();
+  return await UserModel.find().select('_id name email role isDraft');
 };
 
 export const updateUserById = async (
