@@ -3,8 +3,7 @@ import { RouterProvider } from 'react-router/dom';
 
 import { Layout, Login } from '@/pages';
 import { InstancePage } from '@/pages/instances';
-import { CreateUser } from '@/pages/users';
-import { UpdateUser } from '@/pages/users/updateUser';
+import { CreateUser, UpdateUser, UsersPage } from '@/pages/users';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'users',
-        element: <div>users page</div>,
+        element: <UsersPage />,
       },
       {
         path: 'create-user',
