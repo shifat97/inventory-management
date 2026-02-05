@@ -4,7 +4,12 @@ import http from '@/lib/http';
 import { getUserFromLS } from '@/utils';
 
 export const UpdateUser = () => {
-  const onSubmit = (data: UserFormValues) => {
+  const onSubmit = (data: UserFormValues & { confirmPassword?: string }) => {
+    if (data.password && data.password !== data.confirmPassword) {
+      alert("Passwords don't match");
+      return;
+    }
+
     // UPDATE MODE
     const payload = Object.fromEntries(
       Object.entries(data).filter(
@@ -28,7 +33,7 @@ export const UpdateUser = () => {
           name: '',
           email: '',
           password: '',
-          role: '',
+          role: 'shop-keeper',
         }}
         onSubmit={onSubmit}
       />

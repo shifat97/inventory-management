@@ -3,8 +3,12 @@ import { UserForm } from '@/pages/users/_components';
 import type { UserFormValues } from './types';
 
 export const CreateUser = () => {
-  const onSubmit = (data: UserFormValues) => {
-    console.log(data);
+  const onSubmit = (data: UserFormValues & { confirmPassword?: string }) => {
+    if (data.password !== data.confirmPassword) {
+      alert("Passwords don't match");
+      return;
+    }
+
     http
       .post('/api/admin/users', data)
       .then((_res) => alert('User creation successful'))
@@ -21,7 +25,7 @@ export const CreateUser = () => {
           name: '',
           email: '',
           password: '',
-          role: '',
+          role: 'shop-keeper',
         }}
         onSubmit={onSubmit}
       />

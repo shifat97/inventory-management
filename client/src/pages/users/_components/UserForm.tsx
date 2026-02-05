@@ -8,7 +8,7 @@ import { getUserFromLS } from '@/utils';
 interface UserFormProps {
   mode?: 'create' | 'update';
   defaultValues?: Partial<UserFormValues>;
-  onSubmit: (data: UserFormValues) => void;
+  onSubmit: (data: UserFormValues & { confirmPassword?: string }) => void;
 }
 
 export const UserForm = ({
@@ -18,7 +18,7 @@ export const UserForm = ({
 }: UserFormProps) => {
   const isCreate = mode === 'create';
 
-  const form = useForm<UserFormValues>({
+  const form = useForm<UserFormValues & { confirmPassword?: string }>({
     resolver: yupResolver(isCreate ? createUserSchema : updateUserSchema),
     defaultValues,
   });
@@ -64,12 +64,12 @@ export const UserForm = ({
           type="password"
           className={inputStyles}
         />
-
-        <select {...form.register('role')} className={inputStyles}>
-          <option value="">Select Role</option>
-          <option value="admin">Admin</option>
-          <option value="shop-keeper">Shop Keeper</option>
-        </select>
+        <input
+          {...form.register('confirmPassword')}
+          placeholder="Confirm Password"
+          type="password"
+          className={inputStyles}
+        />
 
         <button type="submit" className={buttonStyles}>
           {isCreate ? 'Create User' : 'Update User'}

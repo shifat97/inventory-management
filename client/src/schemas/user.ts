@@ -12,7 +12,7 @@ export const createUserSchema: yup.ObjectSchema<UserFormValues> = yup.object({
 export const updateUserSchema: yup.ObjectSchema<UserFormValues> = yup.object({
   name: yup.string().optional(),
   email: yup.string().email().optional(),
-  password: yup.string().min(6).optional(),
+  password: yup.string().optional(),
   role: yup.string().optional(),
   isDraft: yup.boolean().optional(),
 });
