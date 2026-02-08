@@ -1,6 +1,6 @@
 import http from '@/lib/http';
-import { UserForm } from '@/pages/users/_components';
-import type { UserFormValues } from './types';
+import { UserForm } from '@/pages/users/_components/UserForm';
+import type { UserFormValues } from '@/pages/users';
 
 export const CreateUser = () => {
   const onSubmit = (data: UserFormValues & { confirmPassword?: string }) => {

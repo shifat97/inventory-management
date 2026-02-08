@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserSchema, updateUserSchema } from '@/schemas/user';
-import type { UserFormValues } from '@/pages/users';
+import type { UserFormValues } from '@/pages/users/types';
 import { useEffect } from 'react';
 import { getUserFromLS } from '@/utils';
 

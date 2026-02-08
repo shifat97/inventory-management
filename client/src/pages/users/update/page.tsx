@@ -1,5 +1,5 @@
 import { UserForm } from '@/pages/users/_components';
-import type { UserFormValues } from './types';
+import type { UserFormValues } from '@/pages/users';
 import http from '@/lib/http';
 import { getUserFromLS } from '@/utils';
 

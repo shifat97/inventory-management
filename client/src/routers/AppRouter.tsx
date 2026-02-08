@@ -3,7 +3,9 @@ import { RouterProvider } from 'react-router/dom';
 
 import { Layout, Login } from '@/pages';
 import { InstancePage } from '@/pages/instances';
-import { CreateUser, UpdateUser, UsersPage } from '@/pages/users';
+import { CreateUser } from '@/pages/users/create';
+import { UpdateUser } from '@/pages/users/update';
+import { UsersPage } from '@/pages/users';
 
 const router = createBrowserRouter([
   {
